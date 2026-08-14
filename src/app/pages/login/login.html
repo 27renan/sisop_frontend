@@ -1,0 +1,65 @@
+<section class="container">
+  <div class="banner">
+    <div class="login-dialog">
+      <!--Cabeçalho do login-->
+      <div class="login-header">
+        <div class="icon-circle">
+          <mat-icon class="lock-icon">lock</mat-icon>
+        </div>
+        <h2>Acesse sua conta</h2>
+        <h4>Informe suas credenciais para acessar o sistema</h4>
+      </div>
+
+      <div class="divider">
+        <mat-divider class="mat-divider"></mat-divider>
+      </div>
+
+      <!--Formulário de login-->
+      <section>
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-user">
+            <mat-label class="label">Usuário</mat-label>
+            <mat-form-field class="mat-form-field" appearance="outline">
+              <mat-icon matPrefix>person</mat-icon>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="Informe seu usuário"
+              />
+              @if (loginForm.get('email')?.hasError('required')) {
+                <mat-error>E-mail é obrigatório</mat-error>
+              }
+
+              @if (loginForm.get('email')?.hasError('email')) {
+                <mat-error>E-mail inválido</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-senha">
+            <mat-label class="label">Senha</mat-label>
+            <mat-form-field class="mat-form-field" appearance="outline">
+              <mat-icon matPrefix>password</mat-icon>
+              <input type="password" matInput placeholder="Senha" formControlName="senha" />
+              @if (loginForm.get('password')?.hasError('required')) {
+                <mat-error>Senha é <strong>obrigatória</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Botão de login -->
+          <section class="login-btn">
+            <button matButton="filled" class="btn" [disabled]="!validaCampos()">
+              <mat-icon>login</mat-icon>Login
+            </button>
+          </section>
+        </form>
+        <p class="footer">
+          2025 SISOP - Sistema de Obras e Patrimônio Imobiliário <br />
+          Força Aérea Brasileira - Todos os direitos reservados
+        </p>
+      </section>
+    </div>
+  </div>
+</section>

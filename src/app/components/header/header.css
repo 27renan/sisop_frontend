@@ -1,0 +1,124 @@
+.container {
+  height: 100vh;
+  width: 100%;
+}
+
+.header {
+  height: 100px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  padding: 0 24px;
+}
+
+.menu-button {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 20%;
+}
+
+.menu-button mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  line-height: 1;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #17233c;
+}
+
+.title span {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 20px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user strong {
+  display: block;
+  text-align: left;
+  margin-top: 25px;
+}
+
+.user small {
+  display: block;
+  color: gray;
+}
+
+.avatar {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+}
+
+/****************************************************/
+.menu {
+  min-width: 250px;
+}
+
+/* Lista */
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
+
+/* Item */
+.menu-item {
+  display: flex;
+  align-items: center;
+
+  height: 48px;
+  border-radius: 8px;
+
+  padding: 0 12px;
+
+  transition: 0.2s ease;
+}
+
+/* Ícone */
+.menu-icon {
+  margin-right: 10px;
+  color: #555;
+}
+
+/* Texto */
+.menu-title {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Hover */
+.menu-item:hover .menu-title {
+  color: rgb(0, 0, 0) !important;
+}
+
+.menu-item:hover .menu-icon {
+  color: #3f51b5;
+}

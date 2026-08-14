@@ -1,0 +1,21 @@
+<div class="logo">
+  <mat-icon class="logo-icon"> apartment </mat-icon>
+  <div>
+    <h2>SISOP</h2>
+    <span>Sistema de Obras e Patrimônio</span>
+  </div>
+</div>
+
+<mat-nav-list class="menu">
+  @for (menu of menus; track menu.rota) {
+    <a mat-list-item [routerLink]="menu.rota" class="menu-item">
+      <mat-icon matListItemIcon class="menu-icon">
+        {{ menu.icone }}
+      </mat-icon>
+
+      <span matListItemTitle class="menu-title">
+        {{ menu.titulo }}
+      </span>
+    </a>
+  }
+</mat-nav-list>

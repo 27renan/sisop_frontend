@@ -1,0 +1,69 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+.nav {
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 16px;
+}
+
+.logo-icon {
+  color: #2d75f1;
+  font-size: 55px;
+  width: 55px;
+  height: 55px;
+}
+
+.logo h2 {
+  margin: 0;
+  color: #000000;
+}
+
+.logo span {
+  font-size: 15px;
+  color: #000000;
+}
+
+.active {
+  background: #4453db;
+}
+
+.menu {
+  padding-right: 5%;
+}
+
+.menu-item {
+  border-radius: 10px !important;
+  margin-left: 2%;
+  color: #3d3c3c !important;
+}
+
+.menu-icon {
+  color: #3d3c3c !important;
+}
+
+.menu-title {
+  color: #3d3c3c;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Efeito ao passar o mouse */
+.menu-item:hover {
+  background: rgba(253, 253, 253, 0.25) !important;
+}
+
+/* Ícone acompanha o hover */
+.menu-item:hover .menu-icon {
+  color: #2d75f1 !important;
+  transition: color 0.3s ease;
+}

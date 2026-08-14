@@ -1,0 +1,17 @@
+<section class="page">
+  <app-header [nomeUsuario]="nomeUsuario" [omUsuario]="omUsuario"> </app-header>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <app-nav></app-nav>
+    </mat-drawer>
+
+    <div class="content">
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- conteúdo da Home -->
+    </div>
+  </mat-drawer-container>
+</section>

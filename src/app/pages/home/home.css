@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+.drawer-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.main-content {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+
+.sidenav {
+  width: 280px;
+  height: 100vh;
+  border-radius: 0;
+  background: #ffffff;
+}
+
+app-nav {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  margin-left: 20px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
