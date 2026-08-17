@@ -15,8 +15,8 @@ import { MatDividerModule } from '@angular/material/divider';
 export class NavComponent {
   menus = [
     {
-      titulo: 'Início',
-      icone: 'home',
+      titulo: 'Dashboard',
+      icone: 'dashboard',
       rota: '/home',
     },
     {

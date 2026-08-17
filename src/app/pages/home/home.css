@@ -33,3 +33,87 @@ app-nav {
   margin-top: 5px;
   box-sizing: border-box;
 }
+
+.title-page {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+/************Cards*******************************/
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 24px;
+}
+
+.dashboard-card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef2ff;
+  color: #3f51b5;
+}
+
+.card-icon mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-title {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.card-info strong {
+  color: #17233c;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.card-info small {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.dashboard-graficos {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  padding: 24px;
+}
+
+.dashboard-grafico {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}

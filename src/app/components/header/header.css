@@ -77,7 +77,6 @@
   color: #9ca3af;
 }
 
-/****************************************************/
 .menu {
   min-width: 250px;
 }
@@ -121,4 +120,31 @@
 
 .menu-item:hover .menu-icon {
   color: #3f51b5;
+}
+
+/* Botão do usuário */
+:host ::ng-deep .user-button.mat-mdc-button:hover {
+  background-color: transparent !important;
+}
+
+:host ::ng-deep .user-button.mat-mdc-button .mat-mdc-button-persistent-ripple::before {
+  opacity: 0 !important;
+}
+
+:host ::ng-deep .user-button.mat-mdc-button .mat-mdc-button-persistent-ripple::after {
+  opacity: 0 !important;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.logo img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
 }

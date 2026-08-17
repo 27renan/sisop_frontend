@@ -6,11 +6,27 @@ import { NavComponent } from '../../components/nav/nav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import {
+  NgApexchartsModule,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+} from 'ng-apexcharts';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, NavComponent, MatSidenavModule, MatButtonModule, MatIconModule],
+  imports: [
+    HeaderComponent,
+    NavComponent,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    NgApexchartsModule,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -18,6 +34,22 @@ export class HomeComponent implements OnInit {
   nomeUsuario: string = '';
   omUsuario: string = '';
   showFiller = signal(false);
+
+  chartObras = {
+    series: [35, 28, 22, 10, 5],
+
+    chart: {
+      type: 'pie' as const,
+      height: 350,
+    },
+
+    labels: ['Em andamento', 'Concluídas', 'Planejadas', 'Paralisadas', 'Canceladas'],
+
+    title: {
+      text: 'Obras por status',
+      align: 'left' as const,
+    },
+  };
 
   constructor(
     private detailsService: DetailsService,
@@ -31,7 +63,6 @@ export class HomeComponent implements OnInit {
   detailsUser() {
     this.detailsService.detailsUser().subscribe({
       next: (usuario) => {
-        console.log(usuario);
         this.nomeUsuario = usuario.nome;
         this.omUsuario = usuario.unidade.sigla;
         localStorage.setItem('role', usuario.role);

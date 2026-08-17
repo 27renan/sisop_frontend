@@ -1,7 +1,10 @@
 <mat-toolbar class="header">
   <!--<button matButton [matMenuTriggerFor]="menu" class="menu-button" aria-label="Abrir menu">
     <mat-icon>menu</mat-icon>
-  </button>>--
+  </button>>-->
+  <div class="logo">
+    <img src="/images/logo.png" alt="Logo SISOP" />
+  </div>
 
   <!-- TITULO -->
   <div class="title">
@@ -13,7 +16,7 @@
   <span class="spacer"></span>
 
   <!-- USUARIO -->
-  <button mat-button [matMenuTriggerFor]="menuUsuario">
+  <button mat-button [matMenuTriggerFor]="menuUsuario" class="user-button">
     <div class="user">
       <mat-icon>account_circle</mat-icon>
 
@@ -42,7 +45,7 @@
 
   <mat-divider></mat-divider>
 
-  <button mat-menu-item><mat-icon color="warn"> logout </mat-icon>Sair</button>
+  <button mat-menu-item (click)="logout()"><mat-icon color="warn"> logout </mat-icon>Sair</button>
 </mat-menu>
 
 <mat-menu #menu="matMenu" class="menu">
