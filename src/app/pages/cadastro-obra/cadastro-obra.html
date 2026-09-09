@@ -1,0 +1,228 @@
+<section class="page">
+  <app-header> </app-header>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <app-nav></app-nav>
+    </mat-drawer>
+
+    <div class="content">
+      <div class="title-page">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Cadastrar Obra</span>
+      </div>
+
+      <!-- conteúdo da Home -->
+
+      <mat-card class="card">
+        <mat-card-content>
+          <span class="title"><strong>1. Informações Gerais</strong></span>
+          <!--Inicio do form-->
+          <form class="form" [formGroup]="obraForm">
+            <!--linha 1-->
+            <!--CIPI-->
+            <div class="input">
+              <mat-label class="label">ID CIPI</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <input
+                  type="text"
+                  matInput
+                  placeholder="EX: CIPI-2025-0001"
+                  formControlName="idCipi"
+                />
+              </mat-form-field>
+            </div>
+            <!--Tipo de obra-->
+            <div class="input">
+              <mat-label class="label">Tipo de Obra</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <mat-select placeholder="Selecione o tipo de obra" formControlName="tipoObra">
+                  <mat-option value="Direta">Direta</mat-option>
+                  <mat-option value="Indireta">Indireta</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--Nome da obra-->
+            <div class="input">
+              <mat-label class="label">Nome da Obra</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Informe o nome da obra"
+                  formControlName="nome"
+                />
+              </mat-form-field>
+            </div>
+            <!--Serviço-->
+            <div class="input">
+              <mat-label class="label">Selecione o serviço</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <mat-select placeholder="Selecione o tipo de obra" formControlName="servico">
+                  <mat-option value="Construcao">Construção</mat-option>
+                  <mat-option value="Reforma">Reforma</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!--linha 2-->
+            <!--Empresa comtratada-->
+            <div class="input">
+              <mat-label class="label">Empresa Contratada</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Informe a Empresa Contratada"
+                  formControlName="empresaContratada"
+                />
+              </mat-form-field>
+            </div>
+
+            <!--Descrição-->
+            <div class="input campo-grande-3-columns">
+              <mat-label class="label">Descrição</mat-label>
+              <mat-form-field class="mat-form-field" appearance="outline">
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Informe a Descrição"
+                  formControlName="descricao"
+                />
+              </mat-form-field>
+            </div>
+
+            <!--Divider (linha 3)-->
+            <mat-divider class="mat-divider"></mat-divider>
+
+            <!--linha 4-->
+            <div class="campo-grande-4-columns">
+              <span class="title"><strong>2. Localização</strong></span>
+            </div>
+            <!--linha 5-->
+            <div class="three-fields">
+              <!-- OM -->
+              <div class="input">
+                <mat-label class="label">OM</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Selecione a OM" formControlName="om">
+                    <mat-option value="CCARJ">CCA-RJ</mat-option>
+                    <mat-option value="DIRAP">DIRAP</mat-option>
+                    <mat-option value="CCASJ">CCA-SJ</mat-option>
+                    <mat-option value="CCABR">CCA-BR</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Estado -->
+              <div class="input">
+                <mat-label class="label">Estado</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    placeholder="Selecione o estado"
+                    (selectionChange)="buscarCidades($event.value)"
+                    formControlName="estado"
+                  >
+                    @for (estado of estados; track estado.id) {
+                      <mat-option [value]="estado.id">
+                        {{ estado.nome }} - {{ estado.sigla }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Cidade -->
+              <div class="input">
+                <mat-label class="label">Cidade</mat-label>
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Selecione a cidade" formControlName="cidade">
+                    @for (cidade of cidades; track cidade.id) {
+                      <mat-option [value]="cidade.id">
+                        {{ cidade.nome }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!--Divider (linha 6)-->
+            <mat-divider class="mat-divider"></mat-divider>
+
+            <!--linha 7-->
+            <div class="campo-grande-4-columns">
+              <span class="title"><strong>3. Período</strong></span>
+            </div>
+
+            <!--linha 8-->
+            <div class="three-fields">
+              <!-- Início da obra -->
+              <div class="input">
+                <mat-label class="label">Início da obra</mat-label>
+                <mat-form-field appearance="outline">
+                  <input
+                    matInput
+                    [matDatepicker]="pickerInicio"
+                    placeholder="DD/MM/AAAA"
+                    formControlName="dataInicio"
+                  />
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerInicio">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #pickerInicio></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <!-- Término da obra -->
+              <div class="input">
+                <mat-label class="label">Término da obra</mat-label>
+                <mat-form-field appearance="outline">
+                  <input
+                    matInput
+                    [matDatepicker]="pickerTermino"
+                    placeholder="DD/MM/AAAA"
+                    formControlName="dataFim"
+                  />
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerTermino">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #pickerTermino></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <!-- Status da obra -->
+              <div class="input">
+                <mat-label class="label">Selecione o status da obra</mat-label>
+                <mat-form-field class="mat-form-field" appearance="outline">
+                  <mat-select placeholder="Selecione o status da obra" formControlName="status">
+                    <mat-option value="Execucao">Em Execução</mat-option>
+                    <mat-option value="Concluida">Concluída</mat-option>
+                    <mat-option value="Paralisada">Paralisada</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--Divider (linha 9)-->
+            <mat-divider class="mat-divider"></mat-divider>
+            <!--linha 10-->
+            <div class="campo-grande-4-columns">
+              <div class="buttons">
+                <button mat-stroked-button class="btn-cancelar" type="button">
+                  <mat-icon>close</mat-icon>
+                  Cancelar
+                </button>
+
+                <button mat-raised-button class="btn-primary" type="button" (click)="onSubmit()">
+                  <mat-icon>save</mat-icon>
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-container>
+
+  <app-footer></app-footer>
+</section>

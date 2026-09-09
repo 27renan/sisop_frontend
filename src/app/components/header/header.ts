@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
+import { DetailsService } from '../../service/details.service';
 
 @Component({
   selector: 'app-header',
@@ -24,15 +25,18 @@ import { MatListModule } from '@angular/material/list';
     MatBadgeModule,
     MatDividerModule,
     MatSidenavModule,
-    RouterLink,
+
     MatListModule,
   ],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class HeaderComponent {
-  @Input() nomeUsuario: string = '';
-  @Input() omUsuario: string = '';
+export class HeaderComponent implements OnInit {
+  // @Input() nomeUsuario: string = '';
+  // @Input() omUsuario: string = '';
+
+  nomeUsuario: string = '';
+  omUsuario: string = '';
 
   menus = [
     {
@@ -76,7 +80,30 @@ export class HeaderComponent {
     private service: AuthService,
     private router: Router,
     private toast: ToastrService,
+    private detailsService: DetailsService,
+    private cdr: ChangeDetectorRef,
   ) {}
+
+  ngOnInit() {
+    this.detailsUser();
+  }
+
+  /***************************Detalhes do usuario***********************************/
+  detailsUser() {
+    this.detailsService.detailsUser().subscribe({
+      next: (usuario) => {
+        //localStorage.setItem('usuarioNome', usuario.nome);
+        //localStorage.setItem('usuarioOM', usuario.unidade.sigla);
+        this.nomeUsuario = usuario.nome;
+        this.omUsuario = usuario.unidade.sigla;
+        localStorage.setItem('role', usuario.role);
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error fetching user details:', error);
+      },
+    });
+  }
 
   logout() {
     this.router.navigate(['login']);

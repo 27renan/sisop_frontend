@@ -1,65 +1,50 @@
 <mat-toolbar class="header">
-  <!--<button matButton [matMenuTriggerFor]="menu" class="menu-button" aria-label="Abrir menu">
-    <mat-icon>menu</mat-icon>
-  </button>>-->
+  <!-- LOGO -->
   <div class="logo">
     <img src="/images/logo.png" alt="Logo SISOP" />
   </div>
 
-  <!-- TITULO -->
+  <!-- TÍTULO -->
   <div class="title">
     <h3>Bem-vindo ao SISOP</h3>
-
-    <span> Sistema de Obras e Patrimônio Imobiliário </span>
+    <span>Sistema de Obras e Patrimônio Imobiliário</span>
   </div>
 
   <span class="spacer"></span>
 
-  <!-- USUARIO -->
+  <!-- USUÁRIO -->
   <button mat-button [matMenuTriggerFor]="menuUsuario" class="user-button">
     <div class="user">
-      <mat-icon>account_circle</mat-icon>
+      <div class="user-avatar">
+        <mat-icon>person</mat-icon>
+      </div>
 
-      <div>
+      <div class="user-info">
         <strong>{{ nomeUsuario }}</strong>
         <span>{{ omUsuario }}</span>
       </div>
 
-      <mat-icon>expand_more</mat-icon>
+      <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
     </div>
   </button>
 </mat-toolbar>
 
-<mat-menu #menuUsuario="matMenu">
+<!-- MENU DO USUÁRIO -->
+<mat-menu #menuUsuario="matMenu" class="user-menu">
   <button mat-menu-item>
-    <mat-icon> person </mat-icon>
-
-    Perfil
+    <mat-icon>person_outline</mat-icon>
+    <span>Perfil</span>
   </button>
 
   <button mat-menu-item>
-    <mat-icon> settings </mat-icon>
-
-    Configurações
+    <mat-icon>settings</mat-icon>
+    <span>Configurações</span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button mat-menu-item (click)="logout()"><mat-icon color="warn"> logout </mat-icon>Sair</button>
-</mat-menu>
-
-<mat-menu #menu="matMenu" class="menu">
-  <mat-nav-list class="nav-menu">
-    @for (menu of menus; track menu.rota) {
-      <a mat-list-item [routerLink]="menu.rota" class="menu-item">
-        <mat-icon matListItemIcon class="menu-icon">
-          {{ menu.icone }}
-        </mat-icon>
-
-        <span matListItemTitle class="menu-title">
-          {{ menu.titulo }}
-        </span>
-      </a>
-    }
-  </mat-nav-list>
+  <button mat-menu-item (click)="logout()" class="logout-button">
+    <mat-icon>logout</mat-icon>
+    <span>Sair do sistema</span>
+  </button>
 </mat-menu>

@@ -7,7 +7,12 @@
 .nav {
   width: 100%;
   height: 100%;
+  background-color: #132843;
 }
+
+/* =========================
+   LOGO
+========================= */
 
 .logo {
   display: flex;
@@ -17,7 +22,7 @@
 }
 
 .logo-icon {
-  color: #2d75f1;
+  color: #2d5da8;
   font-size: 55px;
   width: 55px;
   height: 55px;
@@ -25,45 +30,93 @@
 
 .logo h2 {
   margin: 0;
-  color: #000000;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .logo span {
-  font-size: 15px;
-  color: #000000;
+  font-size: 14px;
+  color: #b8c7d9;
 }
 
-.active {
-  background: #4453db;
-}
+/* =========================
+   MENU
+========================= */
 
 .menu {
-  padding-right: 5%;
+  padding: 10px 5%;
 }
+
+/* Item */
 
 .menu-item {
   border-radius: 10px !important;
-  margin-left: 2%;
-  color: #3d3c3c !important;
+  margin: 4px 0;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease;
 }
+
+/* Ícone */
 
 .menu-icon {
-  color: #3d3c3c !important;
+  color: #cbd5e1 !important;
+  transition: color 0.2s ease;
 }
 
+/* Texto */
+
 .menu-title {
-  color: #3d3c3c;
+  color: #ffffff !important;
   font-size: 16px;
   font-weight: 500;
 }
 
-/* Efeito ao passar o mouse */
+/* =========================
+   HOVER
+========================= */
+
 .menu-item:hover {
-  background: rgba(253, 253, 253, 0.25) !important;
+  background: #1d3a5d !important;
 }
 
-/* Ícone acompanha o hover */
 .menu-item:hover .menu-icon {
-  color: #2d75f1 !important;
-  transition: color 0.3s ease;
+  color: #2d5da8 !important;
+}
+
+.menu-item:hover .menu-title {
+  color: #ffffff !important;
+}
+
+/* =========================
+   ITEM ATIVO
+========================= */
+
+.menu-item.active {
+  background: #2d5da8 !important;
+}
+
+.menu-item.active .menu-icon {
+  color: #ffffff !important;
+}
+
+.menu-item.active .menu-title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* =========================
+   REMOVE OVERLAY DO MATERIAL
+========================= */
+
+:host ::ng-deep .menu-item .mat-mdc-list-item-unscoped-content {
+  width: 100%;
+}
+
+:host ::ng-deep .menu-item .mat-mdc-list-item-interactive::before {
+  opacity: 0 !important;
+}
+
+:host ::ng-deep .menu-item:hover::before {
+  opacity: 0 !important;
 }

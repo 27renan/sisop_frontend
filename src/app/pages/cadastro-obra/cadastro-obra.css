@@ -1,0 +1,180 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.drawer-container {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  background: #f5f7fa;
+}
+
+.sidenav {
+  width: 280px;
+  height: 100%;
+  background: #132843;
+  border-radius: 0;
+  border: none;
+}
+
+.content {
+  min-height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Garante que o nav ocupe todo o drawer */
+.sidenav app-nav {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.title-page {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.card {
+  display: flex;
+  margin-top: 20px;
+  padding: 0px 0px;
+  background: #ffffff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+
+  .title {
+    font-size: 16px;
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+  padding: 10px 24px;
+}
+
+.label {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-grande-3-columns {
+  grid-column: span 3;
+}
+
+.campo-grande-4-columns {
+  grid-column: span 4;
+}
+
+.three-fields {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.three-fields .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.three-fields mat-form-field {
+  width: 100%;
+}
+
+.mat-divider {
+  grid-column: span 4;
+  border-color: #dddcdc;
+  border-width: 2px;
+}
+/***************************CSS para estilizar button do angular ****************************************/
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+.btn-cancelar {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #132843;
+  border-color: #d9dee7;
+}
+
+.btn-cancelar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.btn-primary {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #036af1 !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.btn-primary mat-icon {
+  margin-right: 8px;
+}
+
+/***************************CSS para estilizar input do angular ****************************************/
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__notch,
+::ng-deep .mdc-notched-outline__trailing {
+  border-color: #dddcdc !important;
+}
+
+::ng-deep .mdc-notched-outline__notch {
+  border-right: none !important;
+  border-left: none !important;
+}
+
+::ng-deep .mdc-notched-outline {
+  border-radius: 12px !important;
+}
+
+::ng-deep .mdc-notched-outline__leading {
+  border-radius: 12px 0 0 12px !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-radius: 0 12px 12px 0 !important;
+}

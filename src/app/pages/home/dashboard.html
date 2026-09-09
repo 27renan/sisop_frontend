@@ -1,0 +1,162 @@
+<section class="page">
+  <app-header> </app-header>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <app-nav></app-nav>
+    </mat-drawer>
+
+    <div class="content">
+      <div class="title-page">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Dashboard</span>
+      </div>
+
+      <!-- conteúdo da Home -->
+      <!-- cadrs -->
+      <div class="dashboard-cards">
+        <mat-card class="dashboard-card">
+          <mat-card-content>
+            <div class="card-icon">
+              <mat-icon>construction</mat-icon>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">Obras</span>
+              <strong>{{ listObras.length }}</strong>
+              <small>Obras cadastradas</small>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dashboard-card">
+          <mat-card-content>
+            <div class="card-icon">
+              <mat-icon>apartment</mat-icon>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">Imóveis</span>
+              <strong>{{ listBenfeitorias.length }}</strong>
+              <small>Imóveis cadastrados</small>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dashboard-card">
+          <mat-card-content>
+            <div class="card-icon">
+              <mat-icon>inventory_2</mat-icon>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">Patrimônio</span>
+              <strong>{{ totalPatrimonio }}</strong>
+              <small>Itens cadastrados</small>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dashboard-card">
+          <mat-card-content>
+            <div class="card-icon">
+              <mat-icon>eco</mat-icon>
+            </div>
+
+            <div class="card-info">
+              <span class="card-title">Gestão Ambiental</span>
+              <strong>32</strong>
+              <small>Processos ativos</small>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- cadrs (fim) -->
+
+      <!--grafico-->
+      <!--Obras/situação-->
+      <div class="dashboard-graficos">
+        <mat-card class="dashboard-grafico">
+          <mat-card-content>
+            <apx-chart
+              [series]="chartObras.series"
+              [chart]="chartObras.chart"
+              [labels]="chartObras.labels"
+              [title]="chartObras.title"
+            >
+            </apx-chart>
+          </mat-card-content>
+        </mat-card>
+
+        <!--Patrimônio/situação-->
+        <mat-card class="dashboard-grafico">
+          <mat-card-content>
+            <apx-chart
+              [series]="chartPatrimonio.series"
+              [chart]="chartPatrimonio.chart"
+              [xaxis]="chartPatrimonio.xaxis"
+              [title]="chartPatrimonio.title"
+              [dataLabels]="chartPatrimonio.dataLabels"
+            ></apx-chart>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!--lista obras atrasadas-->
+      <div class="dashboard-graficos2">
+        <mat-card class="dashboard-obras-tipo">
+          <mat-card-content>
+            <apx-chart
+              [series]="chartTipoObra.series"
+              [chart]="chartTipoObra.chart"
+              [plotOptions]="chartTipoObra.plotOptions"
+              [xaxis]="chartTipoObra.xaxis"
+              [title]="chartTipoObra.title"
+              [dataLabels]="chartTipoObra.dataLabels"
+            >
+            </apx-chart>
+          </mat-card-content>
+        </mat-card>
+
+        <!--lista situação dos terrenos-->
+        <mat-card class="dashboard-obras-tipo">
+          <mat-card-content>
+            <apx-chart
+              [series]="chartTerrenosSituacao.series"
+              [chart]="chartTerrenosSituacao.chart"
+              [labels]="chartTerrenosSituacao.labels"
+              [title]="chartTerrenosSituacao.title"
+              [dataLabels]="chartTerrenosSituacao.dataLabels"
+              [legend]="chartTerrenosSituacao.legend"
+              [plotOptions]="chartTerrenosSituacao.plotOptions"
+            >
+            </apx-chart>
+          </mat-card-content>
+        </mat-card>
+
+        <!--lista situação da conservação da benfeitoria-->
+        <mat-card class="dashboard-obras-tipo">
+          <mat-card-content>
+            <apx-chart
+              [series]="chartBenfeitoriasConservacao.series"
+              [chart]="chartBenfeitoriasConservacao.chart"
+              [plotOptions]="chartBenfeitoriasConservacao.plotOptions"
+              [dataLabels]="chartBenfeitoriasConservacao.dataLabels"
+              [xaxis]="chartBenfeitoriasConservacao.xaxis"
+              [yaxis]="chartBenfeitoriasConservacao.yaxis"
+              [title]="chartBenfeitoriasConservacao.title"
+              [tooltip]="chartBenfeitoriasConservacao.tooltip"
+              [legend]="chartBenfeitoriasConservacao.legend"
+            ></apx-chart>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- fim da home-->
+    </div>
+  </mat-drawer-container>
+
+  <app-footer></app-footer>
+</section>
