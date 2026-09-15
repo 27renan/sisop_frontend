@@ -1,4 +1,4 @@
-import { Component, OnInit, afterNextRender } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header';
 import { NavComponent } from '../../components/nav/nav';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -16,7 +16,10 @@ import { Cidade } from '../../models/cidades';
 import { LocalidadesService } from '../../service/localidade.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ChangeDetectorRef } from '@angular/core';
+
+import { firstValueFrom } from 'rxjs';
+import { CreateObraService } from '../../service/createObra.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-obra',
@@ -48,6 +51,7 @@ import { ChangeDetectorRef } from '@angular/core';
 export class CadastroObraComponent implements OnInit {
   estados: Estado[] = ESTADOS;
   cidades: Cidade[] = [];
+
   obraForm!: FormGroup;
 
   estadosCarregados = false;
@@ -55,8 +59,9 @@ export class CadastroObraComponent implements OnInit {
 
   constructor(
     private localidadesService: LocalidadesService,
+    private createObraService: CreateObraService,
+    private toast: ToastrService,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -80,18 +85,8 @@ export class CadastroObraComponent implements OnInit {
     });
   }
 
-  /*carregarEstados(): void {
-    this.localidadesService.getEstados().subscribe({
-      next: (dados) => {
-        this.estados = dados;
-      },
-      error: (erro) => {
-        console.error('Erro ao carregar estados:', erro);
-      },
-    });
-  }*/
-
-  buscarCidades(idEstado: number): void {
+  // Método para listar cidades com base no estado selecionado
+  listaCidades(idEstado: number): void {
     if (!idEstado) {
       this.cidades = [];
       return;
@@ -100,7 +95,6 @@ export class CadastroObraComponent implements OnInit {
     this.localidadesService.getCidadesPorEstado(idEstado).subscribe({
       next: (dados) => {
         this.cidades = dados;
-
         // opcional: limpa a cidade quando muda o estado
         this.obraForm.get('cidade')?.setValue('');
       },
@@ -111,7 +105,64 @@ export class CadastroObraComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.obraForm.value);
+  // Método para buscar o nome do estado e cidade selecionados
+  private async buscarCidade(): Promise<void> {
+    const idEstado = this.obraForm.get('estado')?.value;
+    const idCidade = this.obraForm.get('cidade')?.value;
+
+    const estadoSelecionado = this.estados.find((estado) => estado.id === idEstado);
+
+    if (!estadoSelecionado || !idCidade) {
+      throw new Error('Estado ou cidade não selecionados.');
+    }
+    const cidade = await firstValueFrom(this.localidadesService.getCidade(idCidade));
+    this.obraForm.patchValue({
+      estado: `${estadoSelecionado.nome} - ${estadoSelecionado.sigla}`,
+      cidade: cidade.nome,
+    });
+  }
+
+  // Método para preparar os dados da obra antes de enviar
+  private prepararDadosObra() {
+    const form = this.obraForm.value;
+    return {
+      ...form,
+      dataInicio: new Date(form.dataInicio).toISOString(),
+      dataFim: new Date(form.dataFim).toISOString(),
+    };
+  }
+
+  // Método para enviar os dados da obra para o serviço de criação
+  async onSubmit(): Promise<void> {
+    try {
+      // Buscar e preencher os nomes do estado e cidade antes de enviar os dados
+      await this.buscarCidade();
+
+      // Preparar os dados da obra para envio
+      const dadosObra = this.prepararDadosObra();
+
+      // Enviar os dados da obra para o serviço de criação
+      this.createObraService.createObra(dadosObra).subscribe({
+        next: (obra) => {
+          this.toast.success('Obra cadastrada com sucesso!', 'Cadastro de obras', {
+            timeOut: 7000,
+          });
+          this.obraForm.reset();
+          this.cidades = [];
+        },
+
+        error: (erro) => {
+          console.error('Erro ao cadastrar obra:', erro);
+          this.toast.error('Erro ao cadastrar obra!', 'Cadastro de obras', {
+            timeOut: 7000,
+          });
+        },
+      });
+    } catch (erro) {
+      console.error('Erro ao preparar cadastro:', erro);
+      this.toast.error('Não foi possível preparar o cadastro da obra.', 'Cadastro de obras', {
+        timeOut: 7000,
+      });
+    }
   }
 }

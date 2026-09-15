@@ -19,4 +19,8 @@ export class LocalidadesService {
   getCidadesPorEstado(idEstado: number): Observable<Cidade[]> {
     return this.http.get<Cidade[]>(`${this.API}/estados/${idEstado}/municipios?orderBy=nome`);
   }
+
+  getCidade(idCidade: number): Observable<Cidade> {
+    return this.http.get<Cidade>(`${this.API}/municipios/${idCidade}`);
+  }
 }

@@ -41,6 +41,7 @@
                 <mat-select placeholder="Selecione o tipo de obra" formControlName="tipoObra">
                   <mat-option value="Direta">Direta</mat-option>
                   <mat-option value="Indireta">Indireta</mat-option>
+                  <mat-option value="Supervisão">Supervisão</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -63,6 +64,9 @@
                 <mat-select placeholder="Selecione o tipo de obra" formControlName="servico">
                   <mat-option value="Construcao">Construção</mat-option>
                   <mat-option value="Reforma">Reforma</mat-option>
+                  <mat-option value="Manutencao">Manutenção</mat-option>
+                  <mat-option value="Ampliacao">Ampliação</mat-option>
+                  <mat-option value="Reforma">Adequação</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -122,7 +126,7 @@
                 <mat-form-field appearance="outline">
                   <mat-select
                     placeholder="Selecione o estado"
-                    (selectionChange)="buscarCidades($event.value)"
+                    (selectionChange)="listaCidades($event.value)"
                     formControlName="estado"
                   >
                     @for (estado of estados; track estado.id) {
@@ -198,6 +202,7 @@
                     <mat-option value="Execucao">Em Execução</mat-option>
                     <mat-option value="Concluida">Concluída</mat-option>
                     <mat-option value="Paralisada">Paralisada</mat-option>
+                    <mat-option value="Planejada">Planejada</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>

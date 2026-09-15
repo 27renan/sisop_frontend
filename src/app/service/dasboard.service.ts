@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from '../config/api.config';
 import { HttpClient } from '@angular/common/http';
-import { DetailsUser } from '../models/detailsUser';
 import { Observable } from 'rxjs';
 import { Obra } from '../models/obras';
 import { Terreno } from '../models/terrenos';

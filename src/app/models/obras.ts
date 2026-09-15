@@ -9,7 +9,7 @@ export interface Obra {
   om: string;
   estado: string;
   cidade: string;
-  inicio_obra: Date;
-  final_obra: Date;
+  dataInicio: Date;
+  dataFim: Date;
   status: string;
 }

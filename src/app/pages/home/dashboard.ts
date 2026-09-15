@@ -282,9 +282,9 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarGraficoTipoObra(obras: Obra[]) {
-    const tipos = ['Construção', 'Reforma', 'Manutenção', 'Ampliação'];
-    const quantidade = tipos.map((tipo) => {
-      return obras.filter((obra) => obra.tipo_obra === tipo).length;
+    const tipos = ['Construcao', 'Reforma', 'Manutencao', 'Ampliacao'];
+    const quantidade = tipos.map((servico) => {
+      return obras.filter((obra) => obra.servico === servico).length;
     });
 
     this.chartTipoObra = {
