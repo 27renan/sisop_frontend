@@ -1,0 +1,167 @@
+<section class="page">
+  <app-header> </app-header>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <app-nav></app-nav>
+    </mat-drawer>
+
+    <div class="content">
+      <div class="title-page">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <!--<span>Obras</span>-->
+      </div>
+
+      <!-- conteúdo da page -->
+      <!--card Filter-->
+      <mat-card class="card-filter">
+        <mat-card-content class="card-content">
+          <mat-form-field class="mat-form-field" appearance="outline">
+            <mat-label>Pesquise por uma obra</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              [(ngModel)]="filtro"
+              placeholder="Pesquise por uma obra..."
+              #input
+            />
+          </mat-form-field>
+          <button mat-stroked-button class="btn-filter" type="button" (click)="clearFilter()">
+            <mat-icon>filter_alt_off</mat-icon>
+            Limpar Filtro
+          </button>
+          <button mat-stroked-button class="btn-newObra" type="button" (click)="novaObra()">
+            <mat-icon>add</mat-icon>
+            Nova obra
+          </button>
+        </mat-card-content>
+      </mat-card>
+      <!--Card table-->
+      <mat-card class="card">
+        <mat-card-content>
+          <div>
+            <table mat-table [dataSource]="dataSource" class="mat-shadow-2">
+              <!-- ID CIPI Column -->
+              <ng-container matColumnDef="id_cipi">
+                <th mat-header-cell *matHeaderCellDef>ID CIPI</th>
+                <td mat-cell *matCellDef="let element" class="coluna-id-cipi">
+                  {{ element.id_cipi }}
+                </td>
+              </ng-container>
+
+              <!-- Obra Column -->
+              <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef>Obra</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="coluna-nome">
+                    <span class="nome">{{ element.nome }}</span>
+                    <span class="descricao">{{ element.descricao }}</span>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- OM Column -->
+              <ng-container matColumnDef="om">
+                <th mat-header-cell *matHeaderCellDef>OM</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="coluna-om">
+                    {{ element.om }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Tipo Column -->
+              <ng-container matColumnDef="tipo_obra">
+                <th mat-header-cell *matHeaderCellDef>TIPO</th>
+                <td mat-cell *matCellDef="let element">{{ element.tipo_obra }}</td>
+              </ng-container>
+
+              <!-- Localização Column -->
+              <ng-container matColumnDef="cidade">
+                <th mat-header-cell *matHeaderCellDef>LOCALIZAÇÃO</th>
+                <td mat-cell *matCellDef="let element">{{ element.cidade }}</td>
+              </ng-container>
+
+              <!-- Periodo Column -->
+              <ng-container matColumnDef="periodo">
+                <th mat-header-cell *matHeaderCellDef>PERÍODO</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="coluna-periodo">
+                    <span>
+                      {{ element.dataInicio | date: 'dd/MM/yyyy' }}
+                    </span>
+
+                    <span class="seta-periodo">→</span>
+
+                    <span>
+                      {{ element.dataFim | date: 'dd/MM/yyyy' }}
+                    </span>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>STATUS</th>
+                <td mat-cell *matCellDef="let element">
+                  <span
+                    class="coluna-status"
+                    [ngClass]="{
+                      'status-execucao': element.status === 'Execucao',
+                      'status-concluida': element.status === 'Concluida',
+                      'status-atrasada': element.status === 'Atrasada',
+                      'status-paralisada': element.status === 'Paralisada',
+                      'status-planejada': element.status === 'Planejada',
+                    }"
+                  >
+                    <span class="status-dot"></span>
+                    {{ element.status }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Ações Column -->
+              <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef>AÇÕES</th>
+                <td mat-cell *matCellDef="let obra" class="col-acoes">
+                  <div class="acoes-container">
+                    <!-- Visualizar -->
+                    <button
+                      type="button"
+                      class="btn-acao btn-visualizar"
+                      matTooltip="Visualizar obra"
+                    >
+                      <mat-icon>visibility</mat-icon>
+                    </button>
+
+                    <!-- Editar -->
+                    <button type="button" class="btn-acao btn-editar" matTooltip="Editar obra">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <!-- Excluir -->
+                    <button type="button" class="btn-acao btn-excluir" matTooltip="Excluir obra">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[10, 25, 100]"
+              aria-label="Select page of users"
+            ></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-container>
+
+  <app-footer></app-footer>
+</section>

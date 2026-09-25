@@ -62,25 +62,20 @@ export class LoginComponent implements OnInit {
     this.service.authenticate(this.creds).subscribe({
       next: (response) => {
         const authorization = response.token;
-
         if (!authorization) {
           this.toast.error('Token não retornado pelo servidor.');
           return;
         }
-
         const token = authorization.replace('Bearer ', '');
-
         this.service.successfulLogin(token);
-
         this.toast.success('Login realizado com sucesso', 'Login', {
           timeOut: 7000,
         });
-
-        setTimeout(() => {
+        /*setTimeout(() => {
           this.router.navigate(['/home']);
         }, 0);
-
-        //this.router.navigate(['/home']);
+        */
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.toast.error('Usuário e/ou senha inválidos');

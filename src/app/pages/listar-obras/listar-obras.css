@@ -1,0 +1,495 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.drawer-container {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  background: #f5f7fa;
+}
+
+.sidenav {
+  width: 280px;
+  height: 100%;
+  background: #132843;
+  border-radius: 0;
+  border: none;
+}
+
+.content {
+  min-height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Garante que o nav ocupe todo o drawer */
+.sidenav app-nav {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.title-page {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.card {
+  display: flex;
+  margin-top: 10px;
+  padding: 0px 0px;
+  background: #ffffff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+
+  .title {
+    font-size: 16px;
+  }
+}
+
+.card-filter {
+  margin-top: 10px;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+
+  .card-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 6px;
+  }
+
+  .mat-form-field {
+    flex: 1;
+    margin: 0;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .btn-filter {
+    height: 50px;
+    margin-top: -18px;
+    white-space: nowrap;
+  }
+
+  .btn-newObra {
+    height: 50px;
+    margin-top: -18px;
+    white-space: nowrap;
+    background-color: #036af1 !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+}
+
+/* Cabeçalho da tabela */
+
+.mat-mdc-header-row {
+  background: #f1f6fc;
+  height: 52px;
+}
+
+.mat-mdc-header-cell {
+  color: #132843;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #dbe5f0;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+/* ================================
+   COLUNA ID_CIPI
+================================ */
+
+.coluna-id-cipi {
+  font-weight: 600;
+}
+
+/* ================================
+   COLUNA NOME
+================================ */
+
+.coluna-nome {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  .nome {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .descricao {
+    font-size: 12px;
+    color: #64748b;
+  }
+}
+
+/* ================================
+   COLUNA OM
+================================ */
+
+.coluna-om {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  background-color: #e8f2ff;
+  color: #1261b5;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* ================================
+   COLUNA STATUS
+================================ */
+
+.coluna-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 6px 11px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+/* Em andamento */
+.status-execucao {
+  background-color: #dff6eb;
+  color: #12945f;
+
+  .status-dot {
+    background-color: #12945f;
+  }
+}
+
+/* Concluída */
+.status-concluida {
+  background-color: #e1efff;
+  color: #1268d4;
+
+  .status-dot {
+    background-color: #1268d4;
+  }
+}
+
+/* Atrasada */
+.status-atrasada {
+  background-color: #fff0dc;
+  color: #ed7900;
+
+  .status-dot {
+    background-color: #ed7900;
+  }
+}
+
+/* Paralisada */
+.status-paralisada {
+  background-color: #fff0dc;
+  color: #ed7900;
+
+  .status-dot {
+    background-color: #ed7900;
+  }
+}
+
+/* Planejada */
+.status-planejada {
+  background-color: #b5d7f7;
+  color: #0aacf7;
+
+  .status-dot {
+    background-color: #ed7900;
+  }
+}
+
+/* ================================
+   COLUNA PERÍODO
+================================ */
+
+.coluna-periodo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.seta-periodo {
+  font-size: 20px;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+/* ================================
+   COLUNA AÇÕES
+================================ */
+
+.col-acoes {
+  width: 145px;
+  min-width: 145px;
+  max-width: 145px;
+  text-align: center;
+}
+
+/* Container dos três botões */
+.acoes-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Botão */
+.btn-acao {
+  width: 40px;
+  height: 32px;
+
+  min-width: 40px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+/* Ícone */
+.btn-acao mat-icon {
+  width: 18px;
+  height: 18px;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   VISUALIZAR
+================================ */
+
+.btn-visualizar {
+  color: #1266d6;
+  background-color: #eaf3ff;
+}
+
+.btn-visualizar:hover {
+  background-color: #dcecff;
+}
+
+.btn-visualizar:active {
+  transform: scale(0.94);
+}
+
+/* ================================
+   EDITAR
+================================ */
+
+.btn-editar {
+  color: #1266d6;
+  background-color: #eaf3ff;
+}
+
+.btn-editar:hover {
+  background-color: #dcecff;
+}
+
+.btn-editar:active {
+  transform: scale(0.94);
+}
+
+/* ================================
+   EXCLUIR
+================================ */
+
+.btn-excluir {
+  color: #e53935;
+  background-color: #ffebed;
+}
+
+.btn-excluir:hover {
+  background-color: #ffe0e3;
+}
+
+.btn-excluir:active {
+  transform: scale(0.94);
+}
+
+/* Linhas */
+
+.mat-mdc-row {
+  height: 64px;
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-cell {
+  color: #334155;
+  font-size: 13px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #edf2f7;
+  white-space: nowrap;
+}
+
+/* Efeito ao passar o mouse */
+
+.mat-mdc-row:hover {
+  background-color: #f8fbff;
+}
+
+/* Última linha */
+
+.mat-mdc-row:last-child .mat-mdc-cell {
+  border-bottom: none;
+}
+
+/* Primeira coluna: ID CIPI */
+
+.mat-column-position {
+  color: #132843;
+  font-weight: 600;
+  width: 80px;
+}
+
+/* Nome da obra */
+
+.mat-column-name {
+  min-width: 220px;
+}
+
+/* Peso */
+
+.mat-column-weight {
+  min-width: 100px;
+}
+
+/* Símbolo */
+
+.mat-column-symbol {
+  min-width: 100px;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+/***************************CSS para estilizar button do angular ****************************************/
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+.btn-cancelar {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #132843;
+  border-color: #d9dee7;
+}
+
+.btn-cancelar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.btn-primary {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #036af1 !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+.btn-primary mat-icon {
+  margin-right: 8px;
+}
+
+/***************************CSS para estilizar input do angular ****************************************/
+::ng-deep .mdc-notched-outline__leading,
+::ng-deep .mdc-notched-outline__notch,
+::ng-deep .mdc-notched-outline__trailing {
+  border-color: #dddcdc !important;
+}
+
+::ng-deep .mdc-notched-outline__notch {
+  border-right: none !important;
+  border-left: none !important;
+}
+
+::ng-deep .mdc-notched-outline {
+  border-radius: 12px !important;
+}
+
+::ng-deep .mdc-notched-outline__leading {
+  border-radius: 12px 0 0 12px !important;
+}
+
+::ng-deep .mdc-notched-outline__trailing {
+  border-radius: 0 12px 12px 0 !important;
+}
