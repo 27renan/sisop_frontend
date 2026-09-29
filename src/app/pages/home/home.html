@@ -1,0 +1,23 @@
+<section class="page">
+  <app-header></app-header>
+
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <app-nav></app-nav>
+    </mat-drawer>
+
+    <main class="content">
+      <!-- Menu sobre o banner -->
+      <div class="title-page">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon class="icon">menu</mat-icon>
+        </button>
+      </div>
+
+      <!-- Banner -->
+      <div class="banner"></div>
+    </main>
+  </mat-drawer-container>
+
+  <app-footer></app-footer>
+</section>

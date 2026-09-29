@@ -122,7 +122,7 @@
   padding: 20px 24px;
 }
 
-.btn-cancelar {
+.btn-voltar {
   height: 44px;
   padding: 0 24px;
   border-radius: 10px;
@@ -131,26 +131,8 @@
   border-color: #d9dee7;
 }
 
-.btn-cancelar:hover {
+.btn-voltar:hover {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
-}
-
-.btn-primary {
-  height: 44px;
-  padding: 0 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  background: #036af1 !important;
-  color: white !important;
-}
-
-.btn-primary:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
-}
-
-.btn-primary mat-icon {
-  margin-right: 8px;
 }
 
 /***************************CSS para estilizar input do angular ****************************************/

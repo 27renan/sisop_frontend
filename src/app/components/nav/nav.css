@@ -1,13 +1,18 @@
 :host {
   display: block;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 .nav {
   width: 100%;
   height: 100%;
-  background-color: #132843;
+  display: flex;
+  flex-direction: column;
+  background-color: #e8eef8;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -19,6 +24,8 @@
   align-items: center;
   gap: 15px;
   padding: 20px 16px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .logo-icon {
@@ -30,14 +37,14 @@
 
 .logo h2 {
   margin: 0;
-  color: #ffffff;
+  color: #666565;
   font-size: 24px;
   font-weight: 700;
 }
 
 .logo span {
   font-size: 14px;
-  color: #b8c7d9;
+  color: #868b91;
 }
 
 /* =========================
@@ -45,29 +52,42 @@
 ========================= */
 
 .menu {
+  width: 100%;
   padding: 10px 5%;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: 1;
 }
 
-/* Item */
+/* =========================
+   ITEM
+========================= */
 
 .menu-item {
+  width: 100%;
   border-radius: 10px !important;
   margin: 4px 0;
   color: #ffffff !important;
   transition: background-color 0.2s ease;
+  box-sizing: border-box;
 }
 
-/* Ícone */
+/* =========================
+   ÍCONE
+========================= */
 
 .menu-icon {
-  color: #cbd5e1 !important;
+  color: #666565 !important;
   transition: color 0.2s ease;
 }
 
-/* Texto */
+/* =========================
+   TEXTO
+========================= */
 
 .menu-title {
-  color: #ffffff !important;
+  color: #666565 !important;
   font-size: 16px;
   font-weight: 500;
 }
@@ -106,7 +126,7 @@
 }
 
 /* =========================
-   REMOVE OVERLAY DO MATERIAL
+   ANGULAR MATERIAL
 ========================= */
 
 :host ::ng-deep .menu-item .mat-mdc-list-item-unscoped-content {
@@ -119,4 +139,16 @@
 
 :host ::ng-deep .menu-item:hover::before {
   opacity: 0 !important;
+}
+
+/* =========================
+   REMOVE ROLAGEM
+========================= */
+
+:host ::ng-deep .mat-mdc-nav-list {
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .mat-mdc-list-base {
+  overflow: hidden !important;
 }

@@ -108,6 +108,7 @@ export class ListarObrasComponent implements OnInit {
     this.obrasService.getObras().subscribe({
       next: (obras) => {
         this.ELEMENT_DATA = obras.map((obra) => ({
+          id: obra.id,
           id_cipi: obra.id_cipi,
           nome: obra.nome,
           descricao: obra.descricao,
@@ -128,5 +129,9 @@ export class ListarObrasComponent implements OnInit {
 
   novaObra(): void {
     this.router.navigate(['/obras/nova-obra']);
+  }
+
+  visualizarObra(id: string): void {
+    this.router.navigate(['/obra/visualizar', id]);
   }
 }

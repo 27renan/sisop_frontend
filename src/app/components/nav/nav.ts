@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,11 +13,13 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './nav.css',
 })
 export class NavComponent {
+  constructor(private router: Router) {}
+
   menus = [
     {
       titulo: 'Dashboard',
       icone: 'dashboard',
-      rota: '/home',
+      rota: '/dashboard',
     },
     {
       titulo: 'Obras',
@@ -50,4 +52,8 @@ export class NavComponent {
       rota: '/usuarios',
     },
   ];
+
+  home(): void {
+    this.router.navigate(['/home']);
+  }
 }
