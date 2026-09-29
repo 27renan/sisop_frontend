@@ -18,8 +18,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { firstValueFrom } from 'rxjs';
-import { CreateObraService } from '../../service/createObra.service';
 import { ToastrService } from 'ngx-toastr';
+import { ObrasService } from '../../service/obras.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-obra',
@@ -51,17 +52,16 @@ import { ToastrService } from 'ngx-toastr';
 export class CadastroObraComponent implements OnInit {
   estados: Estado[] = ESTADOS;
   cidades: Cidade[] = [];
-
   obraForm!: FormGroup;
-
   estadosCarregados = false;
   formCriado = false;
 
   constructor(
     private localidadesService: LocalidadesService,
-    private createObraService: CreateObraService,
+    private obraService: ObrasService,
     private toast: ToastrService,
     private fb: FormBuilder,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -142,7 +142,7 @@ export class CadastroObraComponent implements OnInit {
       const dadosObra = this.prepararDadosObra();
 
       // Enviar os dados da obra para o serviço de criação
-      this.createObraService.createObra(dadosObra).subscribe({
+      this.obraService.createObra(dadosObra).subscribe({
         next: (obra) => {
           this.toast.success('Obra cadastrada com sucesso!', 'Cadastro de obras', {
             timeOut: 7000,
@@ -164,5 +164,9 @@ export class CadastroObraComponent implements OnInit {
         timeOut: 7000,
       });
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/obras']);
   }
 }

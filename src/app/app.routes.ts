@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login';
-import { DashboardComponent } from './pages/home/dashboard';
+import { DashboardComponent } from './pages/dashboard/dashboard';
 import { authGuard } from './auth/auth.guard';
 import { CadastroObraComponent } from './pages/cadastro-obra/cadastro-obra';
 import { ListarObrasComponent } from './pages/listar-obras/listar-obras';
+import { VisualizarObraComponent } from './pages/visualizar-obra/visualizar-obra';
+import { HomeComponent } from './pages/home/home';
 
 export const routes: Routes = [
   {
@@ -13,6 +15,12 @@ export const routes: Routes = [
 
   {
     path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [authGuard],
   },
@@ -26,6 +34,12 @@ export const routes: Routes = [
   {
     path: 'obras/nova-obra',
     component: CadastroObraComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'obra/visualizar/:id',
+    component: VisualizarObraComponent,
     canActivate: [authGuard],
   },
 

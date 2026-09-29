@@ -71,10 +71,7 @@ export class LoginComponent implements OnInit {
         this.toast.success('Login realizado com sucesso', 'Login', {
           timeOut: 7000,
         });
-        /*setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 0);
-        */
+
         this.router.navigate(['/home']);
       },
       error: () => {
