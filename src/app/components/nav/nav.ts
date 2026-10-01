@@ -17,6 +17,11 @@ export class NavComponent {
 
   menus = [
     {
+      titulo: 'Home',
+      icone: 'home',
+      rota: '/home',
+    },
+    {
       titulo: 'Dashboard',
       icone: 'dashboard',
       rota: '/dashboard',
