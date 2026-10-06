@@ -6,6 +6,7 @@ import { CadastroObraComponent } from './pages/cadastro-obra/cadastro-obra';
 import { ListarObrasComponent } from './pages/listar-obras/listar-obras';
 import { VisualizarObraComponent } from './pages/visualizar-obra/visualizar-obra';
 import { HomeComponent } from './pages/home/home';
+import { EditObraComponent } from './pages/edit-obra/edit-obra';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,12 @@ export const routes: Routes = [
   {
     path: 'obra/visualizar/:id',
     component: VisualizarObraComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'obra/editar/:id',
+    component: EditObraComponent,
     canActivate: [authGuard],
   },
 

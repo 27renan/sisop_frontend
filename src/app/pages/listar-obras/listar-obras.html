@@ -138,12 +138,22 @@
                     </button>
 
                     <!-- Editar -->
-                    <button type="button" class="btn-acao btn-editar" matTooltip="Editar obra">
+                    <button
+                      type="button"
+                      class="btn-acao btn-editar"
+                      matTooltip="Editar obra"
+                      (click)="editarObra(obra.id)"
+                    >
                       <mat-icon>edit</mat-icon>
                     </button>
 
                     <!-- Excluir -->
-                    <button type="button" class="btn-acao btn-excluir" matTooltip="Excluir obra">
+                    <button
+                      type="button"
+                      class="btn-acao btn-excluir"
+                      matTooltip="Excluir obra"
+                      (click)="excluirObra(obra.id)"
+                    >
                       <mat-icon>delete</mat-icon>
                     </button>
                   </div>

@@ -15,6 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { Credenciais } from '../../models/credenciais';
+import { AppCookieService } from '../../service/cookie.service';
+import { DetailsService } from '../../service/details.service';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +46,8 @@ export class LoginComponent implements OnInit {
     private toast: ToastrService,
     private service: AuthService,
     private router: Router,
+    private appCookieService: AppCookieService,
+    private detailsService: DetailsService,
   ) {}
 
   ngOnInit(): void {
@@ -58,22 +62,42 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    // Atualiza as credenciais com os valores do formulário
     this.creds = this.loginForm.value;
     this.service.authenticate(this.creds).subscribe({
       next: (response) => {
+        // Extrai o token da resposta
         const authorization = response.token;
+        // Verifica se o token foi retornado
         if (!authorization) {
           this.toast.error('Token não retornado pelo servidor.');
           return;
         }
+        // Remove o prefixo "Bearer " do token, se presente
         const token = authorization.replace('Bearer ', '');
-        this.service.successfulLogin(token);
-        this.toast.success('Login realizado com sucesso', 'Login', {
-          timeOut: 7000,
-        });
 
-        this.router.navigate(['/home']);
+        // Salva o token
+        this.service.successfulLogin(token);
+
+        // Busca os dados completos do usuário
+        this.detailsService.detailsUser().subscribe({
+          next: (usuario) => {
+            // Salva o usuário completo no cookie
+            this.appCookieService.salvarUsuario(usuario);
+            this.toast.success('Login realizado com sucesso', 'Login', {
+              timeOut: 7000,
+            });
+            // Redireciona para a página home após o login bem-sucedido
+            this.router.navigate(['/home']);
+          },
+
+          error: (error) => {
+            console.error('Erro ao buscar dados do usuário:', error);
+            this.toast.error('Não foi possível carregar os dados do usuário.');
+          },
+        });
       },
+
       error: () => {
         this.toast.error('Usuário e/ou senha inválidos');
       },
