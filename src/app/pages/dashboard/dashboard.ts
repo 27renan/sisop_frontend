@@ -15,7 +15,7 @@ import {
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
 import { DashboardService } from '../../service/dasboard.service';
-import { Obra } from '../../models/obras';
+import { Obra } from '../../models/obra';
 import { Terreno } from '../../models/terrenos';
 import { Benfeitoria } from '../../models/benfeitorias';
 import { FooterComponent } from '../../components/footer/footer';

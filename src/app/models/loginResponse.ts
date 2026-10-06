@@ -1,8 +1,5 @@
-export interface LoginResponse {
-  id: string;
-  nome: string;
-  email: string;
-  role: string;
-  cod_unidade: number;
+import { Usuario } from './usuario';
+
+export interface LoginResponse extends Usuario {
   token: string;
 }

@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { DetailsService } from '../../service/details.service';
+import { AppCookieService } from '../../service/cookie.service';
 
 @Component({
   selector: 'app-header',
@@ -38,62 +39,31 @@ export class HeaderComponent implements OnInit {
   nomeUsuario: string = '';
   omUsuario: string = '';
 
-  menus = [
-    {
-      titulo: 'Início',
-      icone: 'home',
-      rota: '/home',
-    },
-    {
-      titulo: 'Obras',
-      icone: 'construction',
-      rota: '/obras',
-    },
-    {
-      titulo: 'Patrimônio',
-      icone: 'inventory_2',
-      rota: '/patrimonio',
-    },
-    {
-      titulo: 'Imóveis',
-      icone: 'apartment',
-      rota: '/imoveis',
-    },
-    {
-      titulo: 'Gestão Ambiental',
-      icone: 'eco',
-      rota: '/ambiental',
-    },
-    {
-      titulo: 'Relatórios',
-      icone: 'assessment',
-      rota: '/relatorios',
-    },
-    {
-      titulo: 'Usuários',
-      icone: 'group',
-      rota: '/usuarios',
-    },
-  ];
-
   constructor(
     private service: AuthService,
     private router: Router,
     private toast: ToastrService,
     private detailsService: DetailsService,
     private cdr: ChangeDetectorRef,
+    private appCookieService: AppCookieService,
   ) {}
 
   ngOnInit() {
-    this.detailsUser();
+    //this.detailsUser();
+
+    const usuario = this.appCookieService.obterUsuario();
+
+    if (usuario) {
+      this.nomeUsuario = usuario.nome;
+      this.omUsuario = usuario.unidade.sigla;
+      localStorage.setItem('role', usuario.role);
+    }
   }
 
   /***************************Detalhes do usuario***********************************/
   detailsUser() {
     this.detailsService.detailsUser().subscribe({
       next: (usuario) => {
-        //localStorage.setItem('usuarioNome', usuario.nome);
-        //localStorage.setItem('usuarioOM', usuario.unidade.sigla);
         this.nomeUsuario = usuario.nome;
         this.omUsuario = usuario.unidade.sigla;
         localStorage.setItem('role', usuario.role);
@@ -106,6 +76,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.appCookieService.removerUsuario();
     this.router.navigate(['login']);
     this.service.logout();
     this.toast.info('Logout realizado com sucesso', 'Logout');

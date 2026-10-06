@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_CONFIG } from '../config/api.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Obra } from '../models/obras';
+import { Obra } from '../models/obra';
 import { Terreno } from '../models/terrenos';
 import { Benfeitoria } from '../models/benfeitorias';
 

@@ -134,4 +134,12 @@ export class ListarObrasComponent implements OnInit {
   visualizarObra(id: string): void {
     this.router.navigate(['/obra/visualizar', id]);
   }
+
+  editarObra(id: string): void {
+    this.router.navigate(['/obra/editar', id]);
+  }
+
+  excluirObra(id: string): void {
+    this.router.navigate(['/obra/excluir', id]);
+  }
 }
