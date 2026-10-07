@@ -21,6 +21,7 @@ import { firstValueFrom } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ObrasService } from '../../service/obras.service';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-cadastro-obra',
@@ -62,6 +63,7 @@ export class CadastroObraComponent implements OnInit {
     private toast: ToastrService,
     private fb: FormBuilder,
     private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -141,17 +143,23 @@ export class CadastroObraComponent implements OnInit {
       // Preparar os dados da obra para envio
       const dadosObra = this.prepararDadosObra();
 
+      // Obtém o timestamp de início do carregamento e exibe o spinner
+      const inicioLoading = this.loadingService.show();
+
       // Enviar os dados da obra para o serviço de criação
       this.obraService.createObra(dadosObra).subscribe({
         next: (obra) => {
+          // Oculta o spinner de carregamento
+          this.loadingService.hide(inicioLoading);
           this.toast.success('Obra cadastrada com sucesso!', 'Cadastro de obras', {
             timeOut: 7000,
           });
           this.obraForm.reset();
           this.cidades = [];
         },
-
         error: (erro) => {
+          // Oculta o spinner de carregamento
+          this.loadingService.hide(inicioLoading);
           console.error('Erro ao cadastrar obra:', erro);
           this.toast.error('Erro ao cadastrar obra!', 'Cadastro de obras', {
             timeOut: 7000,
@@ -167,6 +175,10 @@ export class CadastroObraComponent implements OnInit {
   }
 
   cancelar(): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
     this.router.navigate(['/obras']);
   }
 }

@@ -20,6 +20,7 @@ import { ObrasService } from '../../service/obras.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-listar-obras',
@@ -74,7 +75,10 @@ export class ListarObrasComponent implements OnInit {
 
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-  constructor(private obrasService: ObrasService) {}
+  constructor(
+    private obrasService: ObrasService,
+    private loadingService: LoadingService,
+  ) {}
 
   ngOnInit(): void {
     this.loadObras();
@@ -128,18 +132,42 @@ export class ListarObrasComponent implements OnInit {
   }
 
   novaObra(): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
+
+    // Navega para a página de cadastro de nova obra
     this.router.navigate(['/obras/nova-obra']);
   }
 
   visualizarObra(id: string): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
+
+    // Navega para a página de visualização da obra
     this.router.navigate(['/obra/visualizar', id]);
   }
 
   editarObra(id: string): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
+
+    // Navega para a página de edição da obra
     this.router.navigate(['/obra/editar', id]);
   }
 
   excluirObra(id: string): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
+
+    // Navega para a página de exclusão da obra
     this.router.navigate(['/obra/excluir', id]);
   }
 }

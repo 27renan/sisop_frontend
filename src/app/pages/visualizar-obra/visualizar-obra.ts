@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ObrasService } from '../../service/obras.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-visualizar-obra',
@@ -54,6 +55,7 @@ export class VisualizarObraComponent implements OnInit {
     private obraService: ObrasService,
     private route: ActivatedRoute,
     private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -86,9 +88,13 @@ export class VisualizarObraComponent implements OnInit {
       return;
     }
 
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+
     this.obraService.getObra(id).subscribe({
       next: (obra) => {
-        console.log('Obra encontrada:', obra);
+        // Oculta o spinner de carregamento
+        this.loadingService.hide(inicioLoading);
 
         this.obraForm.controls['idCipi'].setValue(obra.id_cipi);
         this.obraForm.controls['tipoObra'].setValue(obra.tipo_obra);
@@ -103,14 +109,20 @@ export class VisualizarObraComponent implements OnInit {
         this.obraForm.controls['dataFim'].setValue(obra.final_obra);
         this.obraForm.controls['status'].setValue(obra.status);
       },
-
       error: (error) => {
+        // Oculta o spinner de carregamento
+        this.loadingService.hide(inicioLoading);
         console.error('Erro ao buscar obra:', error);
       },
     });
   }
 
   voltar(): void {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
+
     this.router.navigate(['/obras']);
   }
 }
