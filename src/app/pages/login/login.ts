@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { Credenciais } from '../../models/credenciais';
 import { AppCookieService } from '../../service/cookie.service';
 import { DetailsService } from '../../service/details.service';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private appCookieService: AppCookieService,
     private detailsService: DetailsService,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     // Atualiza as credenciais com os valores do formulário
     this.creds = this.loginForm.value;
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+
     this.service.authenticate(this.creds).subscribe({
       next: (response) => {
         // Extrai o token da resposta
@@ -87,6 +92,9 @@ export class LoginComponent implements OnInit {
             this.toast.success('Login realizado com sucesso', 'Login', {
               timeOut: 7000,
             });
+            // Oculta o spinner de carregamento
+            this.loadingService.hide(inicioLoading);
+
             // Redireciona para a página home após o login bem-sucedido
             this.router.navigate(['/home']);
           },
@@ -99,6 +107,8 @@ export class LoginComponent implements OnInit {
       },
 
       error: () => {
+        // Oculta o spinner de carregamento
+        this.loadingService.hide(inicioLoading);
         this.toast.error('Usuário e/ou senha inválidos');
       },
     });

@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { DetailsService } from '../../service/details.service';
 import { AppCookieService } from '../../service/cookie.service';
+import { LoadingService } from '../../service/loading.service';
 
 @Component({
   selector: 'app-header',
@@ -33,9 +34,6 @@ import { AppCookieService } from '../../service/cookie.service';
   styleUrl: './header.css',
 })
 export class HeaderComponent implements OnInit {
-  // @Input() nomeUsuario: string = '';
-  // @Input() omUsuario: string = '';
-
   nomeUsuario: string = '';
   omUsuario: string = '';
 
@@ -46,11 +44,10 @@ export class HeaderComponent implements OnInit {
     private detailsService: DetailsService,
     private cdr: ChangeDetectorRef,
     private appCookieService: AppCookieService,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit() {
-    //this.detailsUser();
-
     const usuario = this.appCookieService.obterUsuario();
 
     if (usuario) {
@@ -76,9 +73,15 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    // Obtém o timestamp de início do carregamento e exibe o spinner
+    const inicioLoading = this.loadingService.show();
+
     this.appCookieService.removerUsuario();
     this.router.navigate(['login']);
     this.service.logout();
     this.toast.info('Logout realizado com sucesso', 'Logout');
+
+    // Oculta o spinner de carregamento
+    this.loadingService.hide(inicioLoading);
   }
 }

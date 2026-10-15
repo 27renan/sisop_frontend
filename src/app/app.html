@@ -1,4 +1,27 @@
-<ngx-spinner type="ball-scale-multiple" bdColor="rgba(0, 0, 0, 0.5)" size="medium">
-  <p style="color: white">Carregando...</p>
+<ngx-spinner
+  bdColor="rgba(8, 20, 35, 0.82)"
+  type="ball-spin-clockwise"
+  [fullScreen]="true"
+  [showSpinner]="false"
+>
+  <div class="loading-container">
+    <div class="spinner-wrapper">
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring spinner-ring-inner"></div>
+
+      <div class="spinner-logo">SISOP</div>
+    </div>
+
+    <div class="loading-text">
+      <span>Carregando</span>
+      <span class="dots">
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+    </div>
+
+    <div class="loading-subtitle">Sistema de Obras e Patrimônio</div>
+  </div>
 </ngx-spinner>
 <router-outlet></router-outlet>
