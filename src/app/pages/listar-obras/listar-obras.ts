@@ -19,8 +19,11 @@ import { ObraLista } from '../../models/obraList';
 import { ObrasService } from '../../service/obras.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingService } from '../../service/loading.service';
+import { DialogService } from '../../service/dialog.service';
+import { Obra } from '../../models/obra';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-listar-obras',
@@ -78,6 +81,7 @@ export class ListarObrasComponent implements OnInit {
   constructor(
     private obrasService: ObrasService,
     private loadingService: LoadingService,
+    private dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
@@ -161,13 +165,35 @@ export class ListarObrasComponent implements OnInit {
     this.router.navigate(['/obra/editar', id]);
   }
 
-  excluirObra(id: string): void {
-    // Obtém o timestamp de início do carregamento e exibe o spinner
-    const inicioLoading = this.loadingService.show();
-    // Oculta o spinner de carregamento
-    this.loadingService.hide(inicioLoading);
+  excluirObra(obra: Obra): void {
+    // abri o dialog de confirmação para exclusão da obra
+    this.dialogService
+      .abrir({
+        title: 'Excluir obra',
+        messageBefore: 'Tem certeza de que deseja excluir a obra ',
+        highlightText: obra.nome,
+        messageAfter: '? Esta ação não poderá ser desfeita.',
+        type: 'confirm',
+        confirmText: 'Excluir',
+        cancelText: 'Cancelar',
+      })
+      .pipe(
+        filter((confirmado) => confirmado === true),
+        switchMap(() => this.obrasService.deleteObra(obra.id)),
+      )
+      .subscribe({
+        next: () => {
+          // Obtém o timestamp de início do carregamento e exibe o spinner
+          const inicioLoading = this.loadingService.show();
+          // Oculta o spinner de carregamento
+          this.loadingService.hide(inicioLoading);
 
-    // Navega para a página de exclusão da obra
-    this.router.navigate(['/obra/excluir', id]);
+          // Atualize a listagem de obras aqui.
+          this.loadObras();
+        },
+        error: (erro) => {
+          console.error('Erro ao excluir obra:', erro);
+        },
+      });
   }
 }
